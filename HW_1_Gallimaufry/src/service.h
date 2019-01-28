@@ -1,21 +1,22 @@
-#ifndef SERVICE_H
-#define SERVICE_H
-#endif
+﻿// Cody Averett
+// Gallimaufry HW_1
 
-#include <iostream>
+#ifndef SERVICE_H_
+#define SERVICE_H_
 
-using namespace std;
+#include <string>
 
-class Service {
+namespace nwacc {
 
-public:
-    Service( string new_client_name, string new_service_type, double new_amount, string new_date);
-    string to_string();
+	class service {
+	public:
+		service(std::string customer_name, std::string service_type, double amount, std::string date);
+		
+		void print_details();
 
-private:
-    string client_name;
-    string service_type;
-    double amount;
-    string date;
+		std::string customer_name = "", service_type = "", date = "";
+		double amount = 0.00;
+	};
 
-};
+}
+#endif // SERVICE_H_
