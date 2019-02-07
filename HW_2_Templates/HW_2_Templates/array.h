@@ -205,7 +205,7 @@ namespace nwacc
 		T & operator[](int index)
 		{
 
-			if (is_valid_record_index(index))
+			if (!is_valid_record_index(index))
 			{
 
 				std::ostringstream index_error;

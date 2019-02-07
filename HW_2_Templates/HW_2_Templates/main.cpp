@@ -44,7 +44,8 @@ int main()
 		{
 			std::cout << i << " : " << list[i] << std::endl;;
 		}
-		// Show that we don't accept invalid indices
+
+		// Show that we don't accept invalid indices
 		nwacc::array<double, 5, 10> list2;
 		list2[15] = 10000;
 
