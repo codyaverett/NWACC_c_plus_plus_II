@@ -37,6 +37,9 @@
 Debug
 Release
 .vs
+x64
 
 *.sln
 *.vcxproj*
+
+.zip
