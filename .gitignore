@@ -42,4 +42,4 @@ x64
 *.sln
 *.vcxproj*
 
-.zip
+*.zip
