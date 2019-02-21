@@ -151,7 +151,7 @@ namespace nwacc
 			}
 		}
 
-		/* rotate_right moves all index elements one index up
+		/* rotate_right_until moves all index elements one index up
 		 *
 		 * @param start_index is the index to start rotating from
 		 *

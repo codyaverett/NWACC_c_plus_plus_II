@@ -376,6 +376,16 @@ namespace nwacc
 			this->erase(--this->end());
 		}
 
+		/* Insert a new element as the new root node of our linked list
+		 * 
+		 * @params value of type T is the value inserted
+		 * 
+		 * @returns void
+		 */
+		void insert(T value)
+		{
+			this->push_front(value);
+		}
 
 		// insert a value BEFORE iterator. 
 		iterator insert(iterator current_iterator, const T & value)
@@ -397,8 +407,6 @@ namespace nwacc
 		}
 
 		/* Remove the value AT iterator
-		 * 
-		 * 
 		 */
 		iterator erase(iterator remove_iterator)
 		{
