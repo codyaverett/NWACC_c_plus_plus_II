@@ -36,10 +36,9 @@
 
 Debug
 Release
-.vs
-x64
 
-*.sln
-*.vcxproj*
+x64
+*.vcxproj
+*.opendb
 
 *.zip

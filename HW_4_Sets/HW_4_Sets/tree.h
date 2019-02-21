@@ -9,15 +9,13 @@ namespace nwacc
 	{
 	private:
 
-
 		struct node
 		{
 			T * data;
 			node * left;
 			node * right;
-
-
 		};
+
 	public:
 	};
 }
