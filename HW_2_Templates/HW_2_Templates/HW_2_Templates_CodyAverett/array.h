@@ -12,7 +12,7 @@
 namespace nwacc
 {
 
-	/**
+/**
 	* array Template Class
 	*
 	* array container accepts 
@@ -23,19 +23,19 @@ namespace nwacc
 	*
 	* @return true or false
 	*/
-	template <typename T, int Bound1, int Bound2>
-	class array {
-		
-	private:
+template <typename T, int Bound1, int Bound2>
+class array
+{
 
-		// Pointer to records allocated as type T
-		T * records;
+  private:
+	// Pointer to records allocated as type T
+	T *records;
 
-		// Upper and lower bound of array
-		int upper_bound;
-		int lower_bound;
+	// Upper and lower bound of array
+	int upper_bound;
+	int lower_bound;
 
-		/**
+	/**
 		* is_valid_record_index
 		*
 		* Check if the provided index an actual index
@@ -44,23 +44,22 @@ namespace nwacc
 		*
 		* @return true or false
 		*/
-		bool is_valid_record_index(const int index) const 
+	bool is_valid_record_index(const int index) const
+	{
+
+		// Check if index is between upper and lower bounds
+		if (index <= upper_bound && index >= lower_bound)
 		{
 
-			// Check if index is between upper and lower bounds
-			if( index <= upper_bound && index >= lower_bound )
-			{
+			// index is valid
+			return true;
 
-				// index is valid
-				return true;
+		} // Index not valid
 
-			} // Index not valid
+		return false;
+	}
 
-			return false;
-			
-		}
-
-		/**
+	/**
 		* is_a_whole_number
 		*
 		* Is the number a whole number
@@ -71,23 +70,21 @@ namespace nwacc
 		*
 		* @return true or false
 		*/
-		bool is_a_whole_number(int value)
+	bool is_a_whole_number(int value)
+	{
+
+		// Check if value is greater than zero
+		if (value >= 0)
 		{
 
-			// Check if value is greater than zero
-			if (value >= 0)
-			{
+			// Value is a whole number
+			return true;
 
-				// Value is a whole number
-				return true;
+		} // Value is not a whole number
+	}
 
-			} // Value is not a whole number
-
-		}
-
-	public:
-
-		/**
+  public:
+	/**
 		* array constructor
 		*
 		* Dynamically allocates an array of type T
@@ -96,45 +93,41 @@ namespace nwacc
 		* @throws runtime error if bounds are not whole numbers
 		*	
 		*/
-		explicit array() :
-			upper_bound{ Bound1 > Bound2 ? Bound1 : Bound2 },
-			lower_bound{ Bound1 < Bound2 ? Bound1 : Bound2 }
+	explicit array() : upper_bound{Bound1 > Bound2 ? Bound1 : Bound2},
+					   lower_bound{Bound1 < Bound2 ? Bound1 : Bound2}
+	{
+
+		print_debug("New array created!");
+
+		this->records = new T[this->count()];
+
+		if (!is_a_whole_number(upper_bound) || !is_a_whole_number(lower_bound))
 		{
 
-			print_debug("New array created!");
+			std::ostringstream not_a_whole_number_error;
+			not_a_whole_number_error
+				<< "The array container bounds must "
+				<< "be a whole number. Received a lower bound of " << lower_bound
+				<< " and upper_bound of " << upper_bound << std::endl;
 
-			this->records = new T[this->count()];
-
-			if ( !is_a_whole_number(upper_bound) || !is_a_whole_number(lower_bound) )
-			{
-
-				std::ostringstream not_a_whole_number_error;
-				not_a_whole_number_error 
-					<< "The array container bounds must " 
-					<< "be a whole number. Received a lower bound of " << lower_bound
-					<< " and upper_bound of " << upper_bound << std::endl;
-
-				throw std::runtime_error{ not_a_whole_number_error.str() };
-
-			}
-
+			throw std::runtime_error{not_a_whole_number_error.str()};
 		}
+	}
 
-		/**
+	/**
 		* array destructor
 		*
 		* Frees memory allocated for the collection
 		*
 		* @return void
 		*/
-		~array()
-		{
+	~array()
+	{
 
-			delete this->records;
+		delete this->records;
+	}
 
-		}
-
-		/**
+	/**
 		 * debug
 		 * 
 		 * Prints class variables to stdout
@@ -143,55 +136,51 @@ namespace nwacc
 		 * 
 		 * @return void
 		 */
-		void print_debug(std::string msg = "PRINT_DEBUG()") const
-		{
+	void print_debug(std::string msg = "PRINT_DEBUG()") const
+	{
+		std::cout << std::endl
+				  << "****** " << msg << " ****** " << std::endl;
+		std::cout << "Upper: " << upper_bound << std::endl;
+		std::cout << "Lower: " << lower_bound << std::endl;
+		std::cout << "Count: " << count() << std::endl;
+	}
 
-			std::cout << std::endl << "****** "<< msg << " ****** " << std::endl;
-			std::cout << "Upper: " << upper_bound << std::endl;
-			std::cout << "Lower: " << lower_bound << std::endl;
-			std::cout << "Count: " << count() << std::endl;
-
-		}
-
-		/**
+	/**
 		* get_upper_bound
 		*
 		* @return int the upper_bound value of this class
 		*/
-		int get_upper_bound() const
-		{
+	int get_upper_bound() const
+	{
 
-			return upper_bound;
+		return upper_bound;
+	}
 
-		}
-
-		/**
+	/**
 		* get_lower_bound
 		*
 		* @return int the lower_bound value of this class
 		*/
-		int get_lower_bound() const
-		{
+	int get_lower_bound() const
+	{
 
-			return lower_bound;
+		return lower_bound;
+	}
 
-		}
-
-		/**
+	/**
 		* count 
 		*
 		* Calculates the total number of array slots
 		* 
 		* @return the maximum number of array records
 		*/
-		int count() const
-		{
+	int count() const
+	{
 
-			return upper_bound - lower_bound + 1;
+		return upper_bound - lower_bound + 1;
+	}
 
-		}
-
-		/**
+	/**
 		* subscript operator implementation
 		*
 		* Allows access to records via [] syntax
@@ -202,25 +191,22 @@ namespace nwacc
 		* 
 		* @return record at index
 		*/
-		T & operator[](int index)
+	T &operator[](int index)
+	{
+
+		if (!is_valid_record_index(index))
 		{
 
-			if (!is_valid_record_index(index))
-			{
+			std::ostringstream index_error;
+			index_error << "Array index must be between " << lower_bound
+						<< " and " << upper_bound << ". Received " << index << std::endl;
 
-				std::ostringstream index_error;
-				index_error << "Array index must be between " << lower_bound
-					<< " and " << upper_bound << ". Received " << index << std::endl;
-			
-				throw std::runtime_error{ index_error.str() };
-
-			}
-			return this->records[index];
-
+			throw std::runtime_error{index_error.str()};
 		}
+		return this->records[index];
+	}
+};
 
-	};
-
-}
+} // namespace nwacc
 
 #endif // ARRAY_H
